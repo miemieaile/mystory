@@ -17,6 +17,7 @@ if($getuser->rights == 1)
         echo "True";
     }
     else
+    {
         echo "False";
     }
 }
