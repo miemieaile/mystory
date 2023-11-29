@@ -6,7 +6,7 @@ FROM php:8.0-apache
 # Precompile PHP code with opcache.
 
 RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install -j$(nproc) bcmath calendar exif gettext sockets dba mysqli pcntl pdo_mysql shmop sysvmsg sysvsem sysvshm
 RUN docker-php-ext-install -j "$(nproc)" opcache
 RUN set -ex; \
   { \
