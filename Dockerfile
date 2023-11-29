@@ -6,6 +6,7 @@ FROM php:8.0-apache
 # Precompile PHP code with opcache.
 
 RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install -j "$(nproc)" opcache
 RUN set -ex; \
   { \
@@ -21,6 +22,7 @@ RUN set -ex; \
     echo "; Configure Opcache Memory (Application-specific)"; \
     echo "opcache.memory_consumption = 32"; \
     echo "extension=mysqli"; \
+    echo "extension=pdo_mysql"; \
   } > "$PHP_INI_DIR/conf.d/cloud-run.ini"
 
 # Copy in custom code from the host machine.
